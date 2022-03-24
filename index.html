@@ -27,28 +27,36 @@
   <meta name="theme-color" content="#7952b3">
 
   <!--.widibaka Code Editor START-->
-    <link rel="stylesheet" href="codemirror/lib/codemirror.css">
-    <link rel="stylesheet" href="codemirror/addon/fold/foldgutter.css">
-    <link rel="stylesheet" href="codemirror/addon/dialog/dialog.css">
-    <link rel="stylesheet" href="codemirror/theme/monokai.css">
-    <script src="codemirror/lib/codemirror.js"></script>
-    <script src="codemirror/addon/search/searchcursor.js"></script>
-    <script src="codemirror/addon/search/search.js"></script>
-    <script src="codemirror/addon/dialog/dialog.js"></script>
-    <script src="codemirror/addon/edit/matchbrackets.js"></script>
-    <script src="codemirror/addon/edit/closebrackets.js"></script>
-    <script src="codemirror/addon/comment/comment.js"></script>
-    <script src="codemirror/addon/wrap/hardwrap.js"></script>
-    <script src="codemirror/addon/fold/foldcode.js"></script>
-    <script src="codemirror/addon/fold/brace-fold.js"></script>
-    <script src="codemirror/mode/javascript/javascript.js"></script>
-    <script src="codemirror/keymap/sublime.js"></script>
-    <script src="codemirror/mode/clike/clike.js"></script>
-    <script src="codemirror/mode/php/php.js"></script>
-    <style>
-      .CodeMirror {border-top: 1px solid #eee; border-bottom: 1px solid #eee; line-height: 1.3; height: 500px}
-      .CodeMirror-linenumbers { padding: 0 8px; }
-    </style>
+  <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="codemirror/addon/fold/foldgutter.css">
+  <link rel="stylesheet" href="codemirror/addon/dialog/dialog.css">
+  <link rel="stylesheet" href="codemirror/theme/monokai.css">
+  <script src="codemirror/lib/codemirror.js"></script>
+  <script src="codemirror/addon/search/searchcursor.js"></script>
+  <script src="codemirror/addon/search/search.js"></script>
+  <script src="codemirror/addon/dialog/dialog.js"></script>
+  <script src="codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="codemirror/addon/edit/closebrackets.js"></script>
+  <script src="codemirror/addon/comment/comment.js"></script>
+  <script src="codemirror/addon/wrap/hardwrap.js"></script>
+  <script src="codemirror/addon/fold/foldcode.js"></script>
+  <script src="codemirror/addon/fold/brace-fold.js"></script>
+  <script src="codemirror/mode/javascript/javascript.js"></script>
+  <script src="codemirror/keymap/sublime.js"></script>
+  <script src="codemirror/mode/clike/clike.js"></script>
+  <script src="codemirror/mode/php/php.js"></script>
+  <style>
+    .CodeMirror {
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      line-height: 1.3;
+      height: 500px
+    }
+
+    .CodeMirror-linenumbers {
+      padding: 0 8px;
+    }
+  </style>
   <!--//.widibaka END-->
 
   <style>
@@ -145,10 +153,11 @@
     /* 
     .widibaka
     */
-    .nav-link{
+    .nav-link {
       color: #fff;
     }
-    .nav-link:hover{
+
+    .nav-link:hover {
       color: rgb(202, 202, 202);
     }
 
@@ -160,17 +169,24 @@
 
     /* Track */
     ::-webkit-scrollbar-track {
-      background: #f1f1f1; 
+      background: #555;
     }
 
     /* Handle */
     ::-webkit-scrollbar-thumb {
-      background: #888; 
+      background: #888;
     }
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-      background: #555; 
+      background: #f1f1f1;
+    }
+    .CodeMirror-scrollbar-filler{
+    background: #555;
+    }
+    .CodeMirror{
+      border-top: 0;
+      border-bottom: 0;
     }
   </style>
 </head>
@@ -193,17 +209,19 @@
       <div class="col-md-6" style="max-width: 750px;">
         <p class="lead">
         <div class="alert alert-danger">Code Anda belum benar!</div>
-        <article class="text-start form-control is-invalid"  id="floatingIxxxnputInvalid"></article>
+        <article class="text-start form-control is-invalid" id="floatingIxxxnputInvalid"></article>
         </p>
       </div>
       <div class="col-md-6" style="max-width: 750px;">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Instruksi</button>
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+              role="tab" aria-controls="home" aria-selected="true">Instruksi</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Output</button>
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+              role="tab" aria-controls="profile" aria-selected="false">Output</button>
           </li>
         </ul>
 
@@ -211,16 +229,17 @@
         <div class="tab-content">
           <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <h1>Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the
+            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit
+              the
               text, and add your own fullscreen background photo to make it your own.</p>
 
             <p>Enable the keymap by
-            loading <a href="codemirror/keymap/sublime.js"><code>keymap/sublime.js</code></a>
-            and setting
-            the <a href="codemirror/doc/manual.html#option_keyMap"><code>keyMap</code></a>
-            option to <code>"sublime"</code>.</p>
+              loading <a href="codemirror/keymap/sublime.js"><code>keymap/sublime.js</code></a>
+              and setting
+              the <a href="codemirror/doc/manual.html#option_keyMap"><code>keyMap</code></a>
+              option to <code>"sublime"</code>.</p>
 
-            
+
 
             <p class="lead">
               <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
@@ -230,7 +249,7 @@
             Jangan lupa simpan text di localstorage
           </div>
         </div>
-        
+
       </div>
     </main>
 
@@ -261,8 +280,8 @@
     value: value,
     lineNumbers: true,
     mode: {
-        name: 'php',
-        startOpen: true
+      name: 'php',
+      startOpen: true
     },
     keyMap: "sublime",
     autoCloseBrackets: true,

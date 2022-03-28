@@ -190,7 +190,7 @@
     }
 
     .max-height-500px{
-      height: 600px;
+      height: 500px;
       overflow-y: scroll;
     }
 
@@ -439,6 +439,9 @@
 
           }
         }, 500);
+      },
+      fail: function(xhr, textStatus, errorThrown){
+         alert('request failed'+errorThrown);
       }
     });
   }

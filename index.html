@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.84.0">
-  <title>Cover Template · Bootstrap v5.0</title>
+  <title>Perang Coding Ver.0</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
 
@@ -188,11 +188,20 @@
       border-top: 0;
       border-bottom: 0;
     }
+
+    .max-height-500px{
+      height: 600px;
+      overflow-y: scroll;
+    }
+
+
+
   </style>
 </head>
 
-<body class="d-flex h-100 text-center text-white bg-dark">
 
+<body class="d-flex h-100 text-center text-white bg-dark" style="height: 100%!important;">
+  
   <div class="d-flex w-100 h-100 p-3 flex-column">
     <header class="cover-container mb-auto mx-auto">
       <div>
@@ -208,49 +217,108 @@
     <main class="w-100 row d-flex justify-content-center">
       <div class="col-md-6" style="max-width: 750px;">
         <p class="lead">
-        <div class="alert alert-danger">Code Anda belum benar!</div>
-        <article class="text-start form-control is-invalid" id="floatingIxxxnputInvalid"></article>
+        <article class="text-start form-control" id="CodeEditor"></article>
+        <button onclick="submit_code();" type="button" class="btn btn-lg btn-outline-success w-100 mt-3">Run Code</button>
         </p>
       </div>
       <div class="col-md-6" style="max-width: 750px;">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-              role="tab" aria-controls="home" aria-selected="true">Instruksi</button>
+            <button class="nav-link active" id="instruksi-tab" data-bs-toggle="tab" data-bs-target="#instruksi" type="button"
+              role="tab" aria-controls="instruksi" aria-selected="true">Instruksi</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-              role="tab" aria-controls="profile" aria-selected="false">Output</button>
+            <button class="nav-link" id="output-tab" data-bs-toggle="tab" data-bs-target="#output" type="button"
+              role="tab" aria-controls="output" aria-selected="false">Output</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="hotkeys-tab" data-bs-toggle="tab" data-bs-target="#hotkeys" type="button"
+              role="tab" aria-controls="hotkeys" aria-selected="false">Hotkeys</button>
           </li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <h1>Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit
-              the
-              text, and add your own fullscreen background photo to make it your own.</p>
+          <div class="tab-pane active max-height-500px" id="instruksi" role="tabpanel" aria-labelledby="instruksi-tab">
+            <h1>Soal 1</h1>
+            <p class="lead">Perbaikilah function tersebut agar dapat me-return hasil dari 5 x 7.</p>
 
-            <p>Enable the keymap by
-              loading <a href="codemirror/keymap/sublime.js"><code>keymap/sublime.js</code></a>
-              and setting
-              the <a href="codemirror/doc/manual.html#option_keyMap"><code>keyMap</code></a>
-              option to <code>"sublime"</code>.</p>
+            <!-- <p><code>if($x){ //a }</code>.</p> -->
 
 
 
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a>
+              <!-- <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a> -->
             </p>
           </div>
-          <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            Jangan lupa simpan text di localstorage
+          <div class="tab-pane max-height-500px" id="output" role="tabpanel" aria-labelledby="profile-tab">
+            <!-- Jangan lupa simpan text di localstorage -->
+            <p class="lead">
+              <div id="hasil_response"></div>
+            </p>
+          </div>
+          <div class="tab-pane text-start max-height-500px row ps-5" id="hotkeys" role="tabpanel" aria-labelledby="profile-tab">
+                Shift-Tab :<i>indentLess,</i><br>
+                Shift-Ctrl-K :<i>deleteLine,</i><br>
+                Alt-Q :<i>wrapLines,</i><br>
+                Ctrl-T :<i>transposeChars,</i><br>
+                Alt-Left :<i>goSubwordLeft,</i><br>
+                Alt-Right :<i>goSubwordRight,</i><br>
+                Ctrl-Up :<i>scrollLineUp,</i><br>
+                Ctrl-Down :<i>scrollLineDown,</i><br>
+                Ctrl-L :<i>selectLine,</i><br>
+                Shift-Ctrl-L :<i>splitSelectionByLine,</i><br>
+                Esc :<i>singleSelectionTop,</i><br>
+                Ctrl-Enter :<i>insertLineAfter,</i><br>
+                Shift-Ctrl-Enter :<i>insertLineBefore,</i><br>
+                Ctrl-D :<i>selectNextOccurrence,</i><br>
+                Shift-Ctrl-Space :<i>selectScope,</i><br>
+                Shift-Ctrl-M :<i>selectBetweenBrackets,</i><br>
+                Ctrl-M :<i>goToBracket,</i><br>
+                Shift-Ctrl-Up :<i>swapLineUp,</i><br>
+                Shift-Ctrl-Down :<i>swapLineDown,</i><br>
+                Ctrl-/ :<i>toggleCommentIndented,</i><br>
+                Ctrl-J :<i>joinLines,</i><br>
+                Shift-Ctrl-D :<i>duplicateLine,</i><br>
+                F9 :<i>sortLines,</i><br>
+                Shift-F9 :<i>reverseSortLines,</i><br>
+                Ctrl-F9 :<i>sortLinesInsensitive,</i><br>
+                Shift-Ctrl-F9 :<i>reverseSortLinesInsensitive,</i><br>
+                F2 :<i>nextBookmark,</i><br>
+                Shift-F2 :<i>prevBookmark,</i><br>
+                Ctrl-F2 :<i>toggleBookmark,</i><br>
+                Shift-Ctrl-F2 :<i>clearBookmarks,</i><br>
+                Alt-F2 :<i>selectBookmarks,</i><br>
+                Backspace :<i>smartBackspace,</i><br>
+                Ctrl-K Ctrl-D :<i>skipAndSelectNextOccurrence,</i><br>
+                Ctrl-K Ctrl-K :<i>delLineRight,</i><br>
+                Ctrl-K Ctrl-U :<i>upcaseAtCursor,</i><br>
+                Ctrl-K Ctrl-L :<i>downcaseAtCursor,</i><br>
+                Ctrl-K Ctrl-Space :<i>setSublimeMark,</i><br>
+                Ctrl-K Ctrl-A :<i>selectToSublimeMark,</i><br>
+                Ctrl-K Ctrl-W :<i>deleteToSublimeMark,</i><br>
+                Ctrl-K Ctrl-X :<i>swapWithSublimeMark,</i><br>
+                Ctrl-K Ctrl-Y :<i>sublimeYank,</i><br>
+                Ctrl-K Ctrl-C :<i>showInCenter,</i><br>
+                Ctrl-K Ctrl-G :<i>clearBookmarks,</i><br>
+                Ctrl-K Ctrl-Backspace :<i>delLineLeft,</i><br>
+                Ctrl-K Ctrl-1 :<i>foldAll,</i><br>
+                Ctrl-K Ctrl-0 :<i>unfoldAll,</i><br>
+                Ctrl-K Ctrl-J :<i>unfoldAll,</i><br>
+                Ctrl-Alt-Up :<i>addCursorToPrevLine,</i><br>
+                Ctrl-Alt-Down :<i>addCursorToNextLine,</i><br>
+                Ctrl-F3 :<i>findUnder,</i><br>
+                Shift-Ctrl-F3 :<i>findUnderPrevious,</i><br>
+                Shift-Ctrl-[ :<i>fold,</i><br>
+                Shift-Ctrl-] :<i>unfold,</i><br>
+                Ctrl-H :<i>replace,</i><br>
+            
           </div>
         </div>
 
       </div>
+      
     </main>
 
     <footer class="mt-auto text-white-50">
@@ -259,25 +327,63 @@
     </footer>
   </div>
 
-
+  
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.7/dist/sweetalert2.all.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+
 
 <script>
-  var value = "// The bindings defined specifically in the Sublime Text mode\nvar bindings = {\n";
-  var map = CodeMirror.keyMap.sublime;
-  for (var key in map) {
-    var val = map[key];
-    if (key != "fallthrough" && val != "..." && (!/find/.test(val) || /findUnder/.test(val)))
-      value += "  \"" + key + "\": \"" + val + "\",\n";
+  
+  var soal = '';
+  var jawaban = '';
+
+  function readTextFile(file)
+  {
+      var rawFile = new XMLHttpRequest();
+      rawFile.open("GET", file, false);
+      rawFile.onreadystatechange = function ()
+      {
+          if(rawFile.readyState === 4)
+          {
+              if(rawFile.status === 200 || rawFile.status == 0)
+              {
+                  soal = rawFile.responseText;
+              }
+          }
+      }
+      rawFile.send(null);
   }
-  value += "}\n\n// The implementation of joinLines\n";
-  value += CodeMirror.commands.joinLines.toString().replace(/^function\s*\(/, "function joinLines(").replace(/\n  /g, "\n") + "\n";
+
+  function readTextFileJawaban(file)
+  {
+      var rawFile = new XMLHttpRequest();
+      rawFile.open("GET", file, false);
+      rawFile.onreadystatechange = function ()
+      {
+          if(rawFile.readyState === 4)
+          {
+              if(rawFile.status === 200 || rawFile.status == 0)
+              {
+                jawaban = rawFile.responseText;
+              }
+          }
+      }
+      rawFile.send(null);
+  }
+  readTextFile('soal1.php')
+  readTextFileJawaban('soal1-jawaban.php')
+
+
   var editor = CodeMirror(document.body.getElementsByTagName("article")[0], {
-    value: value,
+    value: soal,
     lineNumbers: true,
     mode: {
       name: 'php',
@@ -290,6 +396,64 @@
     theme: "monokai",
     tabSize: 2
   });
+
+  editor.options.value;
+
+  function submit_code() {
+    $.ajax({
+      url: 'submit.php',
+      method: 'POST',
+      data: {
+        code: editor.getValue(),
+      },
+
+      success: function (response) {
+        response = response.toString();
+        // response = response.replace(/D:\\xampp_BARU\\htdocs\\perang-coding\\submit.php(5) : eval()'d code/g, ''); //<-- ngilangin submit.php nya susah bgt!
+        setTimeout(() => {
+          if ( response == jawaban ) {
+            Swal.fire(
+              'Good job!',
+              '',
+              'success'
+            );
+            $('#CodeEditor').addClass('is-valid').removeClass('is-invalid');
+            $('#hasil_response').html( '<h1 class="text-success">Betul! Jawabannya adalah <b>' + response + '</b></h1>');
+            $('#output-tab').tab('show');
+          }else{
+            if ( response == '' ) {
+              let response_new = '<h1 class="text-danger">Salah!</h1><b>Error: the function is not returning any value!</b>';
+              $('#hasil_response').html(response_new);
+            }else{
+              let response_new = '<h1 class="text-danger">Salah!</h1>' + response;
+              $('#hasil_response').html(response_new);
+            }
+            Swal.fire(
+              'Jawaban Anda masih salah!',
+              '',
+              'error'
+            );
+            $('#CodeEditor').addClass('is-invalid').removeClass('is-valid');
+            
+            $('#output-tab').tab('show');
+
+          }
+        }, 500);
+      }
+    });
+  }
+
+  $(document).ajaxStart(function(){
+      $.LoadingOverlay("show", {
+        background: "rgba(0, 0, 0, 0.5)",
+        image: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="margin-right:-2px;display:block;background-repeat-y:initial;background-repeat-x:initial;animation-play-state:paused" ><g transform="translate(50 50)" style="transform:matrix(1, 0, 0, 1, 50, 50);animation-play-state:paused; background-color:rgb(241, 242, 243)" ><g transform="matrix(1,0,0,1,0,0)" style="transform:matrix(1, 0, 0, 1, 0, 0);animation-play-state:paused" ><path d="M29.491524206117255 -5.5 L37.491524206117255 -5.5 L37.491524206117255 5.5 L29.491524206117255 5.5 A30 30 0 0 1 24.742744050198738 16.964569457146712 L24.742744050198738 16.964569457146712 L30.399598299691117 22.621423706639092 L22.621423706639096 30.399598299691114 L16.964569457146716 24.742744050198734 A30 30 0 0 1 5.5 29.491524206117255 L5.5 29.491524206117255 L5.5 37.491524206117255 L-5.499999999999997 37.491524206117255 L-5.499999999999997 29.491524206117255 A30 30 0 0 1 -16.964569457146705 24.742744050198738 L-16.964569457146705 24.742744050198738 L-22.621423706639085 30.399598299691117 L-30.399598299691117 22.621423706639092 L-24.742744050198738 16.964569457146712 A30 30 0 0 1 -29.491524206117255 5.500000000000009 L-29.491524206117255 5.500000000000009 L-37.491524206117255 5.50000000000001 L-37.491524206117255 -5.500000000000001 L-29.491524206117255 -5.500000000000002 A30 30 0 0 1 -24.742744050198738 -16.964569457146705 L-24.742744050198738 -16.964569457146705 L-30.399598299691117 -22.621423706639085 L-22.621423706639092 -30.399598299691117 L-16.964569457146712 -24.742744050198738 A30 30 0 0 1 -5.500000000000011 -29.491524206117255 L-5.500000000000011 -29.491524206117255 L-5.500000000000012 -37.491524206117255 L5.499999999999998 -37.491524206117255 L5.5 -29.491524206117255 A30 30 0 0 1 16.964569457146702 -24.74274405019874 L16.964569457146702 -24.74274405019874 L22.62142370663908 -30.39959829969112 L30.399598299691117 -22.6214237066391 L24.742744050198738 -16.964569457146716 A30 30 0 0 1 29.491524206117255 -5.500000000000013 M0 -20A20 20 0 1 0 0 20 A20 20 0 1 0 0 -20" fill="#93dbe9" style="animation-play-state:paused" ></path></g></g><!-- generated by https://loading.io/ --></svg>',
+        imageColor: "#fff", 
+      });
+  });
+  $(document).ajaxStop(function(){
+      $.LoadingOverlay("hide");
+  });
 </script>
 
 </html>
+

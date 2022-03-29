@@ -241,8 +241,8 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <div class="tab-pane active max-height-500px" id="instruksi" role="tabpanel" aria-labelledby="instruksi-tab">
-            <h1>Soal 1</h1>
-            <p class="lead">Perbaikilah function tersebut agar dapat me-return hasil dari 5 x 7.</p>
+            <h1 id="judul_soal"></h1>
+            <p class="lead h3" id="instruksi_text">Sebentar ...</p>
 
             <!-- <p><code>if($x){ //a }</code>.</p> -->
 
@@ -341,9 +341,12 @@
 
 
 <script>
+
+  var nomor_soal = '2';
   
   var soal = '';
   var jawaban = '';
+  var instruksi = '';
 
   function readTextFile(file)
   {
@@ -378,9 +381,29 @@
       }
       rawFile.send(null);
   }
-  readTextFile('soal1.php')
-  readTextFileJawaban('soal1-jawaban.php')
 
+  function readTextFileInstruksi(file)
+  {
+      var rawFile = new XMLHttpRequest();
+      rawFile.open("GET", file, false);
+      rawFile.onreadystatechange = function ()
+      {
+          if(rawFile.readyState === 4)
+          {
+              if(rawFile.status === 200 || rawFile.status == 0)
+              {
+                instruksi = rawFile.responseText;
+              }
+          }
+      }
+      rawFile.send(null);
+  }
+  readTextFile('soal'+nomor_soal+'.php');
+  readTextFileJawaban('soal'+nomor_soal+'-jawaban.php');
+  readTextFileInstruksi('soal'+nomor_soal+'-instruksi.php');
+
+  $('#instruksi_text').html(instruksi);
+  $('#judul_soal').html('Soal '+nomor_soal);
 
   var editor = CodeMirror(document.body.getElementsByTagName("article")[0], {
     value: soal,

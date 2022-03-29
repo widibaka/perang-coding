@@ -1,0 +1,1 @@
+Berikut sudah disiapkan sebuah array dengan berbagai macam angka sebagai elements-nya. Silakan Anda return element dengan index ke-100 dari array tersebut.

@@ -1,0 +1,1 @@
+Perbaikilah function tersebut agar dapat me-return hasil dari 5 x 7.

@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.84.0">
-  <title>Perang Coding Ver.0</title>
+  <title>Perang Coding Ver.0.0.1</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
 
@@ -89,6 +89,10 @@
       color: rgb(199, 199, 199);
       background-color: #333;
       text-shadow: none;
+    }
+
+    .btn-flat{
+      border-radius: 0;
     }
 
     /* .widibaka END */
@@ -189,8 +193,8 @@
       border-bottom: 0;
     }
 
-    .max-height-500px{
-      height: 500px;
+    .max-height-489px{
+      height: 489px;
       overflow-y: scroll;
     }
 
@@ -218,7 +222,7 @@
       <div class="col-md-6" style="max-width: 750px;">
         <p class="lead">
         <article class="text-start form-control" id="CodeEditor"></article>
-        <button onclick="submit_code();" type="button" class="btn btn-lg btn-outline-success w-100 mt-3">Run Code</button>
+        <button onclick="submit_code();" type="button" class="btn btn-lg btn-flat btn-outline-success w-100 mt-3">Run Code</button>
         </p>
       </div>
       <div class="col-md-6" style="max-width: 750px;">
@@ -240,7 +244,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane active max-height-500px" id="instruksi" role="tabpanel" aria-labelledby="instruksi-tab">
+          <div class="tab-pane active max-height-489px" id="instruksi" role="tabpanel" aria-labelledby="instruksi-tab">
             <h1 id="judul_soal"></h1>
             <p class="lead h3" id="instruksi_text">Sebentar ...</p>
 
@@ -249,16 +253,16 @@
 
 
             <p class="lead">
-              <!-- <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Learn more</a> -->
+              <!-- <a href="#" class="btn btn-lg btn-flat btn-secondary fw-bold border-white bg-white">Learn more</a> -->
             </p>
           </div>
-          <div class="tab-pane max-height-500px" id="output" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="tab-pane max-height-489px" id="output" role="tabpanel" aria-labelledby="profile-tab">
             <!-- Jangan lupa simpan text di localstorage -->
             <p class="lead">
               <div id="hasil_response"></div>
             </p>
           </div>
-          <div class="tab-pane text-start max-height-500px row ps-5" id="hotkeys" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="tab-pane text-start max-height-489px row ps-5" id="hotkeys" role="tabpanel" aria-labelledby="profile-tab">
                 Shift-Tab :<i>indentLess,</i><br>
                 Shift-Ctrl-K :<i>deleteLine,</i><br>
                 Alt-Q :<i>wrapLines,</i><br>
@@ -317,6 +321,9 @@
           </div>
         </div>
 
+        <div class="row" id="wadah_tombol_kembali_berikutnya">
+          
+        </div>
       </div>
       
     </main>
@@ -342,8 +349,43 @@
 
 <script>
 
-  var nomor_soal = '2';
+  function findGetParameter(parameterName) {
+      var result = 1,
+          tmp = [];
+      var items = location.search.substr(1).split("&");
+      for (var index = 0; index < items.length; index++) {
+          tmp = items[index].split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+      }
+      return result;
+  }
+
+  var nomor_soal = findGetParameter('soal'); 
+
+  if ( nomor_soal > 1 ) {
+    $('#wadah_tombol_kembali_berikutnya').append(`<a onclick="$.LoadingOverlay('show');" href="./?soal=${parseInt(nomor_soal)-1}" class="col-6 btn btn-lg btn-flat btn-danger w-50 mt-3" id="sebelumnya">Sebelumnya</a>`);
+  }
+
+  // buat const Toast
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   
+  
+  //awali localstorage dengan string kosong
+  if ( localStorage.getItem("terjawab") == undefined ) {
+    localStorage.setItem("terjawab", "");
+  }
+
   var soal = '';
   var jawaban = '';
   var instruksi = '';
@@ -398,12 +440,14 @@
       }
       rawFile.send(null);
   }
-  readTextFile('soal'+nomor_soal+'.php');
-  readTextFileJawaban('soal'+nomor_soal+'-jawaban.php');
-  readTextFileInstruksi('soal'+nomor_soal+'-instruksi.php');
+
+  readTextFile('soal'+ nomor_soal + '/soal.php');
+  readTextFileJawaban('soal'+nomor_soal+'/jawaban.php');
+  readTextFileInstruksi('soal'+nomor_soal+'/instruksi.php');
 
   $('#instruksi_text').html(instruksi);
   $('#judul_soal').html('Soal '+nomor_soal);
+  
 
   var editor = CodeMirror(document.body.getElementsByTagName("article")[0], {
     value: soal,
@@ -420,7 +464,47 @@
     tabSize: 2
   });
 
-  editor.options.value;
+  // editor.options.value;
+
+  function langsung_salah(hasil_new) {
+    if ( hasil_new == undefined ) {
+      hasil_new = '<b>Error: the function is not returning any value!</b>';
+    }
+    hasil_new = hasil_new.replace('\\perang-coding\\submit.php', '');
+    hasil_new = hasil_new.replace(' : eval()\'d', '');
+    hasil_new = hasil_new.replace('\\perang-coding\\submit.php', '');
+    hasil_new = hasil_new.replace(' : eval()\'d', '');
+    hasil_new = hasil_new.replace('\\perang-coding\\submit.php', '');
+    hasil_new = hasil_new.replace(' : eval()\'d', '');
+    $('#hasil_response').html('<h1 class="text-danger">Salah!</h1>'+hasil_new);
+    $('#CodeEditor').addClass('is-invalid').removeClass('is-valid');
+    $('#output-tab').tab('show');
+
+    // Swal.fire(
+    //   'Jawaban Anda masih salah!',
+    //   '',
+    //   'error'
+    // );
+
+    Toast.fire({
+      icon: 'error',
+      title: 'Jawaban Anda masih salah!'
+    });
+
+    $('#CodeEditor').addClass('is-invalid').removeClass('is-valid');
+    
+    $('#output-tab').tab('show');
+  }
+
+  function munculkan_tombol_berikutnya(){
+    // munculkan tombol "berikutnya"
+    if ( $('#wadah_tombol_kembali_berikutnya').find('#berikutnya').length == 0 ) {
+      $('#wadah_tombol_kembali_berikutnya').append(`<a onclick="$.LoadingOverlay('show');" href="./?soal=${parseInt(nomor_soal)+1}" class="col-6 btn btn-lg btn-flat btn-primary w-50 mt-3" id="berikutnya" style="display: block;">Berikutnya</a>`);
+    }
+    // setTimeout( ()=>{
+    //   $('#berikutnya').show(300);
+    // }, 1000 );
+  }
 
   function submit_code() {
     $.ajax({
@@ -428,39 +512,68 @@
       method: 'POST',
       data: {
         code: editor.getValue(),
+        nomor_soal: nomor_soal,
       },
 
       success: function (response) {
-        response = response.toString();
+        try{
+          JSON.parse(response);
+        }catch(x){
+          setTimeout(()=>{
+            langsung_salah(response);
+            return;
+          },500);
+        }
+        
         // response = response.replace(/D:\\xampp_BARU\\htdocs\\perang-coding\\submit.php(5) : eval()'d code/g, ''); //<-- ngilangin submit.php nya susah bgt!
         setTimeout(() => {
-          if ( response == jawaban ) {
-            Swal.fire(
-              'Good job!',
-              '',
-              'success'
-            );
-            $('#CodeEditor').addClass('is-valid').removeClass('is-invalid');
-            $('#hasil_response').html( '<h1 class="text-success">Betul! Jawabannya adalah <b>' + response + '</b></h1>');
-            $('#output-tab').tab('show');
-          }else{
-            if ( response == '' ) {
-              let response_new = '<h1 class="text-danger">Salah!</h1><b>Error: the function is not returning any value!</b>';
-              $('#hasil_response').html(response_new);
+          response = JSON.parse(response);
+
+          if ( response.hasil != null ) {
+            response.hasil = response.hasil.toString();
+          }
+
+          if( response.hasil == undefined || response.hasil != jawaban ){
+            if ( response.hasil != undefined ) {
+              langsung_salah('Jawabannya bukan '+response.hasil);
             }else{
-              let response_new = '<h1 class="text-danger">Salah!</h1>' + response;
-              $('#hasil_response').html(response_new);
+              langsung_salah();
             }
-            Swal.fire(
-              'Jawaban Anda masih salah!',
-              '',
-              'error'
+            return;
+          }
+          if (response.hasil == jawaban) {
+            // Swal.fire(
+            //   'Good job!',
+            //   '',
+            //   'success'
+            // );
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Good job!'
+            });
+
+            // simpan kode ke localstorage
+            localStorage.setItem(
+              "soal"+nomor_soal, 
+              editor.getValue()
             );
-            $('#CodeEditor').addClass('is-invalid').removeClass('is-valid');
-            
+
+            // simpan localstorage
+            localStorage.setItem(
+              "terjawab", 
+              localStorage.getItem("terjawab")+"#"+nomor_soal
+            );
+
+            $('#CodeEditor').addClass('is-valid').removeClass('is-invalid');
+            $('#hasil_response').html( '<h1 class="text-success">Betul! Jawabannya adalah <b>' + response.hasil + '</b></h1>');
             $('#output-tab').tab('show');
 
+            if ( response.soal_berlanjut == true ) {
+              munculkan_tombol_berikutnya();
+            }
           }
+
         }, 500);
       },
       fail: function(xhr, textStatus, errorThrown){
@@ -479,6 +592,37 @@
   $(document).ajaxStop(function(){
       $.LoadingOverlay("hide");
   });
+
+
+
+  if ( localStorage.getItem("terjawab").includes('#'+nomor_soal) ) {
+    munculkan_tombol_berikutnya();
+  }
+
+  if ( localStorage.getItem("soal"+nomor_soal) != null ) {
+    editor.setValue(
+      localStorage.getItem("soal"+nomor_soal)
+    );
+  }
+
+  editor.on("keyup", function(cm, event) {
+      // simpan kode ke localstorage
+      localStorage.setItem(
+        "soal"+nomor_soal, 
+        editor.getValue()
+      );
+  });
+
+  setTimeout(()=>{
+    if ( jawaban == '' && soal == '' && instruksi == '' ) {
+      Swal.fire(
+        'Selamat!',
+        'Anda sudah menyelesaikan semua soal.',
+        'success'
+      );
+      $('main').remove();
+    }
+  },1);
 </script>
 
 </html>

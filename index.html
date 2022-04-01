@@ -534,6 +534,7 @@
 
           if( response.hasil == undefined || response.hasil != jawaban ){
             if ( response.hasil != undefined ) {
+              response.hasil = response.hasil.replace(/script>/g, 'dilarang>')
               langsung_salah('Jawabannya bukan '+response.hasil);
             }else{
               langsung_salah();

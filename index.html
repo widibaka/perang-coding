@@ -469,13 +469,18 @@
     if ( hasil_new == undefined ) {
       hasil_new = '<b>Error: the function is not returning any value!</b>';
     }
-    hasil_new = hasil_new.replace('\\perang-coding\\submit.php', '');
-    hasil_new = hasil_new.replace(' : eval()\'d', '');
-    hasil_new = hasil_new.replace('\\perang-coding\\submit.php', '');
-    hasil_new = hasil_new.replace(' : eval()\'d', '');
-    hasil_new = hasil_new.replace('\\perang-coding\\submit.php', '');
-    hasil_new = hasil_new.replace(' : eval()\'d', '');
+    hasil_new = hasil_new.replace('\\submit.php', '');
+    hasil_new = hasil_new.replace(' : eval()', '');
+    hasil_new = hasil_new.replace('\\submit.php', '');
+    hasil_new = hasil_new.replace(' : eval()', '');
+    hasil_new = hasil_new.replace('\\submit.php', '');
+    hasil_new = hasil_new.replace(' : eval()', '');
     $('#hasil_response').html('<h1 class="text-danger">Salah!</h1>'+hasil_new);
+
+    if ( hasil_new.includes('Terdeteksi upaya peretasan') ) {
+      $('#hasil_response').html('<h1 class="text-danger">Awas!</h1>'+hasil_new);
+    }
+
     $('#CodeEditor').addClass('is-invalid').removeClass('is-valid');
     $('#output-tab').tab('show');
 

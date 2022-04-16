@@ -217,6 +217,7 @@
 							<tr>
 								<th>Nama</th>
 								<th>Score</th>
+								<th>Soal Terjawab</th>
 								<th>Per Tanggal</th>
 							</tr>
 						</thead>
@@ -225,6 +226,9 @@
                 <tr>
                   <td style="padding-top: 10px; padding-bottom: 10px;"><?php echo $key ?></td>
                   <td style="padding-top: 10px; padding-bottom: 10px;"><?php echo count($row) ?></td>
+                  <td style="padding-top: 10px; padding-bottom: 10px;"><?php foreach ($row as $key => $value): ?>
+                    [<?php echo $value['nomor_soal'] ?>]
+                  <?php endforeach ?></td>
                   <td style="padding-top: 10px; padding-bottom: 10px;"><?php echo (isset($row[0]['timestamp'])) ? $row[0]['timestamp'] : 'n/a' ?></td>
                 </tr>
               <?php endforeach ?>

@@ -1,0 +1,1 @@
+Silakan Anda return sebuah string dengan karakter bintang * sebanyak seratus.

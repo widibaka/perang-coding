@@ -1,0 +1,1 @@
+$string = "Untuk Indonesia raya";

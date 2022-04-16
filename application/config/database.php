@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'perang_coding',
+	'hostname' => perang_coding_hostname,
+	'username' => perang_coding_username,
+	'password' => perang_coding_password,
+	'database' => perang_coding_database,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

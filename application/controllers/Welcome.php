@@ -18,12 +18,33 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public $jumlah_soal = 0;
+
+	public function __construct()
 	{
-		$this->load->view('welcome_message');
+		parent::__construct();
+		$this->load->model("Model");
 	}
 
-	public function submit()
+	public function index()
+	{
+		$files_in_root = scandir( APPPATH . '/..' );
+		foreach ($files_in_root as $key => $val) {
+			if ( strpos($val, 'soal') !== false ) {
+				$this->jumlah_soal++;
+			}
+		}
+
+		$data['jumlah_soal'] = $this->jumlah_soal;
+
+		if ( empty($this->session->userdata('email')) ) {
+			redirect( base_url('login') . '?balik=' . base64_encode( base_url(uri_string()) ) );
+			die;
+		}
+		$this->load->view('welcome_message', $data);
+	}
+
+	public function submit($nomor_soal)
 	{
 
 		$filters = [
@@ -205,6 +226,14 @@ class Welcome extends CI_Controller {
 			// sumber: https://gist.github.com/mccabe615/b0907514d34b2de088c4996933ea1720
 		];
 
+		// simpan jawaban
+		$jawaban = $this->Model->get_jawaban( $this->session->userdata('user_id'),  $nomor_soal);
+		if (!empty($jawaban)) {
+			$this->Model->update_jawaban( $this->session->userdata('user_id'), $nomor_soal, $_POST['code'] );
+		}else{
+			$this->Model->add_jawaban( $this->session->userdata('user_id'), $nomor_soal, $_POST['code'] );
+		}
+
 		foreach ($filters as $key => $value) {
 			if ( strpos($_POST['code'], $value) !== false ) {
 					die('Terdeteksi upaya peretasan! <br> Hentikan kegiatan Anda sekarang juga! Informasi tentang Anda telah diterima Admin.');
@@ -230,5 +259,19 @@ class Welcome extends CI_Controller {
 		}
 
 
+	}
+
+	public function set_sebagai_benar($nomor_soal)
+	{
+		$this->db->where('user_id', $this->session->userdata('user_id'));
+		$this->db->where('nomor_soal', $nomor_soal);
+		echo $this->db->update('perang_coding_jawaban', ['salah_benar' => 'benar']);
+	}
+
+	public function set_sebagai_salah($nomor_soal)
+	{
+		$this->db->where('user_id', $this->session->userdata('user_id'));
+		$this->db->where('nomor_soal', $nomor_soal);
+		echo $this->db->update('perang_coding_jawaban', ['salah_benar' => 'salah']);
 	}
 }

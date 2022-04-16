@@ -1,28 +1,18 @@
 <!doctype html>
 <html lang="id" class="h-100">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Sebuah platform untuk menghilangkan rasa jenuh">
   <meta name="author" content="Widibaka">
-  <title>Perang Coding PHP Ver.0.0.1</title>
-
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
-
-
+  <title>Perang Coding PHP Ver.<?php echo perang_coding_version ?></title>
 
   <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-  <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-  <link rel="manifest" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/manifest.json">
-  <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-  <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/260/260185.png">
   <meta name="theme-color" content="#7952b3">
 
   <!--.widibaka Code Editor START-->
@@ -199,6 +189,7 @@
 
 
 
+
   </style>
 </head>
 
@@ -208,128 +199,157 @@
   <div class="d-flex w-100 h-100 p-3 flex-column">
     <header class="cover-container mb-auto mx-auto">
       <div>
-        <h3 class="float-md-start mb-0 me-5">Cover</h3>
+        <h3 class="float-md-start mb-0 me-5">Perang Coding</h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="#" onclick="open_soal();">Jelajahi Soal</a>
+          <a class="nav-link" href="#" onclick="show_loader();open_highscore();">Highscore</a>
+          <a class="nav-link" href="./logout">LogOut</a>
         </nav>
       </div>
     </header>
 
-    <main class="w-100 row d-flex justify-content-center">
-      <div class="col-md-6" style="max-width: 750px;">
-        <p class="lead">
-        <article class="btn-flat text-start form-control" id="CodeEditor"></article>
-        <button onclick="submit_code();" type="button" class="btn btn-lg btn-flat btn-outline-success w-100 mt-3">Run Code</button>
-        </p>
-      </div>
-      <div class="col-md-6" style="max-width: 750px;">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="instruksi-tab" data-bs-toggle="tab" data-bs-target="#instruksi" type="button"
-              role="tab" aria-controls="instruksi" aria-selected="true">Instruksi</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="output-tab" data-bs-toggle="tab" data-bs-target="#output" type="button"
-              role="tab" aria-controls="output" aria-selected="false">Output</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="hotkeys-tab" data-bs-toggle="tab" data-bs-target="#hotkeys" type="button"
-              role="tab" aria-controls="hotkeys" aria-selected="false">Hotkeys</button>
-          </li>
-        </ul>
+    <main class="w-100 row">
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <div class="tab-pane active max-height-489px" id="instruksi" role="tabpanel" aria-labelledby="instruksi-tab">
-            <h1 id="judul_soal"></h1>
-            <p class="lead h3" id="instruksi_text">Sebentar ...</p>
+      <div class="row mb-5" id="keterangan" style="display: none;">
+        <div class="col-md-12 mx-auto d-flex justify-content-center" style="max-width: 1500px;">
+          <?php 
+            $width_tiap_soal = round(1 / $jumlah_soal * 100);
+            $jumlah_yang_benar = 0;
+          ?>
+          <?php for ($i = 0; $i < $jumlah_soal; $i++): ?>
+            <?php $nomor_soal = $i+1?>
+            <?php if ( $this->Model->apa_jawaban_benar($i+1) ): $jumlah_yang_benar++; ?>
+              <a href="<?= base_url() . '?soal=' . $nomor_soal ?>" class="btn btn-success m-0 text-white" style="width: <?php echo $width_tiap_soal ?>%;"><?php echo $nomor_soal ?></a>
+            <?php elseif( $this->Model->apa_sudah_dijawab( $nomor_soal ) ): ?>
+              <a href="<?= base_url() . '?soal=' . $nomor_soal ?>" class="btn btn-danger m-0 text-white" style="width: <?php echo $width_tiap_soal ?>%;"><?php echo $nomor_soal ?></a>
+            <?php else: ?>
+              <a href="<?= base_url() . '?soal=' . $nomor_soal ?>" class="btn btn-secondary m-0 text-white" style="width: <?php echo $width_tiap_soal ?>%;"><?php echo $nomor_soal ?></a>
+            <?php endif ?>
+          <?php endfor; ?>
 
-            <!-- <p><code>if($x){ //a }</code>.</p> -->
-
-
-
-            <p class="lead">
-              <!-- <a href="#" class="btn btn-lg btn-flat btn-secondary fw-bold border-white bg-white">Learn more</a> -->
-            </p>
-          </div>
-          <div class="tab-pane max-height-489px" id="output" role="tabpanel" aria-labelledby="profile-tab">
-            <!-- Jangan lupa simpan text di localstorage -->
-            <p class="lead">
-              <div id="hasil_response"></div>
-            </p>
-          </div>
-          <div class="tab-pane text-start max-height-489px row ps-5" id="hotkeys" role="tabpanel" aria-labelledby="profile-tab">
-                Shift-Tab :<i>indentLess,</i><br>
-                Shift-Ctrl-K :<i>deleteLine,</i><br>
-                Alt-Q :<i>wrapLines,</i><br>
-                Ctrl-T :<i>transposeChars,</i><br>
-                Alt-Left :<i>goSubwordLeft,</i><br>
-                Alt-Right :<i>goSubwordRight,</i><br>
-                Ctrl-Up :<i>scrollLineUp,</i><br>
-                Ctrl-Down :<i>scrollLineDown,</i><br>
-                Ctrl-L :<i>selectLine,</i><br>
-                Shift-Ctrl-L :<i>splitSelectionByLine,</i><br>
-                Esc :<i>singleSelectionTop,</i><br>
-                Ctrl-Enter :<i>insertLineAfter,</i><br>
-                Shift-Ctrl-Enter :<i>insertLineBefore,</i><br>
-                Ctrl-D :<i>selectNextOccurrence,</i><br>
-                Shift-Ctrl-Space :<i>selectScope,</i><br>
-                Shift-Ctrl-M :<i>selectBetweenBrackets,</i><br>
-                Ctrl-M :<i>goToBracket,</i><br>
-                Shift-Ctrl-Up :<i>swapLineUp,</i><br>
-                Shift-Ctrl-Down :<i>swapLineDown,</i><br>
-                Ctrl-/ :<i>toggleCommentIndented,</i><br>
-                Ctrl-J :<i>joinLines,</i><br>
-                Shift-Ctrl-D :<i>duplicateLine,</i><br>
-                F9 :<i>sortLines,</i><br>
-                Shift-F9 :<i>reverseSortLines,</i><br>
-                Ctrl-F9 :<i>sortLinesInsensitive,</i><br>
-                Shift-Ctrl-F9 :<i>reverseSortLinesInsensitive,</i><br>
-                F2 :<i>nextBookmark,</i><br>
-                Shift-F2 :<i>prevBookmark,</i><br>
-                Ctrl-F2 :<i>toggleBookmark,</i><br>
-                Shift-Ctrl-F2 :<i>clearBookmarks,</i><br>
-                Alt-F2 :<i>selectBookmarks,</i><br>
-                Backspace :<i>smartBackspace,</i><br>
-                Ctrl-K Ctrl-D :<i>skipAndSelectNextOccurrence,</i><br>
-                Ctrl-K Ctrl-K :<i>delLineRight,</i><br>
-                Ctrl-K Ctrl-U :<i>upcaseAtCursor,</i><br>
-                Ctrl-K Ctrl-L :<i>downcaseAtCursor,</i><br>
-                Ctrl-K Ctrl-Space :<i>setSublimeMark,</i><br>
-                Ctrl-K Ctrl-A :<i>selectToSublimeMark,</i><br>
-                Ctrl-K Ctrl-W :<i>deleteToSublimeMark,</i><br>
-                Ctrl-K Ctrl-X :<i>swapWithSublimeMark,</i><br>
-                Ctrl-K Ctrl-Y :<i>sublimeYank,</i><br>
-                Ctrl-K Ctrl-C :<i>showInCenter,</i><br>
-                Ctrl-K Ctrl-G :<i>clearBookmarks,</i><br>
-                Ctrl-K Ctrl-Backspace :<i>delLineLeft,</i><br>
-                Ctrl-K Ctrl-1 :<i>foldAll,</i><br>
-                Ctrl-K Ctrl-0 :<i>unfoldAll,</i><br>
-                Ctrl-K Ctrl-J :<i>unfoldAll,</i><br>
-                Ctrl-Alt-Up :<i>addCursorToPrevLine,</i><br>
-                Ctrl-Alt-Down :<i>addCursorToNextLine,</i><br>
-                Ctrl-F3 :<i>findUnder,</i><br>
-                Shift-Ctrl-F3 :<i>findUnderPrevious,</i><br>
-                Shift-Ctrl-[ :<i>fold,</i><br>
-                Shift-Ctrl-] :<i>unfold,</i><br>
-                Ctrl-H :<i>replace,</i><br>
-            
-          </div>
         </div>
+        <div class="col-md-12">
+         <p class="lead"> Score: <?php echo $jumlah_yang_benar ?>/<?php echo $jumlah_soal ?> </p>
+        </div>
+      </div>
 
-        <div class="row" id="wadah_tombol_kembali_berikutnya">
-          
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-6" style="max-width: 750px;">
+          <p class="lead">
+          <article class="btn-flat text-start form-control" id="CodeEditor"></article>
+          <div class="row" style="width: 99%;">
+            <button onclick="reset_code();" type="button" class="btn btn-lg btn-flat btn-info w-50 mt-3">Reset Code</button>
+            <button onclick="submit_code();" type="button" class="btn btn-lg btn-flat btn-outline-success w-50 mt-3">Run Code</button>
+          </div>
+          </p>
+        </div>
+        <div class="col-md-6" style="max-width: 750px;">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="instruksi-tab" data-bs-toggle="tab" data-bs-target="#instruksi" type="button"
+                role="tab" aria-controls="instruksi" aria-selected="true">Instruksi</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="output-tab" data-bs-toggle="tab" data-bs-target="#output" type="button"
+                role="tab" aria-controls="output" aria-selected="false">Output</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="hotkeys-tab" data-bs-toggle="tab" data-bs-target="#hotkeys" type="button"
+                role="tab" aria-controls="hotkeys" aria-selected="false">Hotkeys</button>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active max-height-489px" id="instruksi" role="tabpanel" aria-labelledby="instruksi-tab">
+              <h1 id="judul_soal"></h1>
+              <p class="lead h3" id="instruksi_text">Sebentar ...</p>
+
+              <!-- <p><code>if($x){ //a }</code>.</p> -->
+
+
+
+              <p class="lead">
+                <!-- <a href="#" class="btn btn-lg btn-flat btn-secondary fw-bold border-white bg-white">Learn more</a> -->
+              </p>
+            </div>
+            <div class="tab-pane max-height-489px" id="output" role="tabpanel" aria-labelledby="profile-tab">
+              <!-- Jangan lupa simpan text di localstorage -->
+              <p class="lead">
+                <div id="hasil_response"></div>
+              </p>
+            </div>
+            <div class="tab-pane text-start max-height-489px row ps-5" id="hotkeys" role="tabpanel" aria-labelledby="profile-tab">
+                  Shift-Tab :<i>indentLess,</i><br>
+                  Shift-Ctrl-K :<i>deleteLine,</i><br>
+                  Alt-Q :<i>wrapLines,</i><br>
+                  Ctrl-T :<i>transposeChars,</i><br>
+                  Alt-Left :<i>goSubwordLeft,</i><br>
+                  Alt-Right :<i>goSubwordRight,</i><br>
+                  Ctrl-Up :<i>scrollLineUp,</i><br>
+                  Ctrl-Down :<i>scrollLineDown,</i><br>
+                  Ctrl-L :<i>selectLine,</i><br>
+                  Shift-Ctrl-L :<i>splitSelectionByLine,</i><br>
+                  Esc :<i>singleSelectionTop,</i><br>
+                  Ctrl-Enter :<i>insertLineAfter,</i><br>
+                  Shift-Ctrl-Enter :<i>insertLineBefore,</i><br>
+                  Ctrl-D :<i>selectNextOccurrence,</i><br>
+                  Shift-Ctrl-Space :<i>selectScope,</i><br>
+                  Shift-Ctrl-M :<i>selectBetweenBrackets,</i><br>
+                  Ctrl-M :<i>goToBracket,</i><br>
+                  Shift-Ctrl-Up :<i>swapLineUp,</i><br>
+                  Shift-Ctrl-Down :<i>swapLineDown,</i><br>
+                  Ctrl-/ :<i>toggleCommentIndented,</i><br>
+                  Ctrl-J :<i>joinLines,</i><br>
+                  Shift-Ctrl-D :<i>duplicateLine,</i><br>
+                  F9 :<i>sortLines,</i><br>
+                  Shift-F9 :<i>reverseSortLines,</i><br>
+                  Ctrl-F9 :<i>sortLinesInsensitive,</i><br>
+                  Shift-Ctrl-F9 :<i>reverseSortLinesInsensitive,</i><br>
+                  F2 :<i>nextBookmark,</i><br>
+                  Shift-F2 :<i>prevBookmark,</i><br>
+                  Ctrl-F2 :<i>toggleBookmark,</i><br>
+                  Shift-Ctrl-F2 :<i>clearBookmarks,</i><br>
+                  Alt-F2 :<i>selectBookmarks,</i><br>
+                  Backspace :<i>smartBackspace,</i><br>
+                  Ctrl-K Ctrl-D :<i>skipAndSelectNextOccurrence,</i><br>
+                  Ctrl-K Ctrl-K :<i>delLineRight,</i><br>
+                  Ctrl-K Ctrl-U :<i>upcaseAtCursor,</i><br>
+                  Ctrl-K Ctrl-L :<i>downcaseAtCursor,</i><br>
+                  Ctrl-K Ctrl-Space :<i>setSublimeMark,</i><br>
+                  Ctrl-K Ctrl-A :<i>selectToSublimeMark,</i><br>
+                  Ctrl-K Ctrl-W :<i>deleteToSublimeMark,</i><br>
+                  Ctrl-K Ctrl-X :<i>swapWithSublimeMark,</i><br>
+                  Ctrl-K Ctrl-Y :<i>sublimeYank,</i><br>
+                  Ctrl-K Ctrl-C :<i>showInCenter,</i><br>
+                  Ctrl-K Ctrl-G :<i>clearBookmarks,</i><br>
+                  Ctrl-K Ctrl-Backspace :<i>delLineLeft,</i><br>
+                  Ctrl-K Ctrl-1 :<i>foldAll,</i><br>
+                  Ctrl-K Ctrl-0 :<i>unfoldAll,</i><br>
+                  Ctrl-K Ctrl-J :<i>unfoldAll,</i><br>
+                  Ctrl-Alt-Up :<i>addCursorToPrevLine,</i><br>
+                  Ctrl-Alt-Down :<i>addCursorToNextLine,</i><br>
+                  Ctrl-F3 :<i>findUnder,</i><br>
+                  Shift-Ctrl-F3 :<i>findUnderPrevious,</i><br>
+                  Shift-Ctrl-[ :<i>fold,</i><br>
+                  Shift-Ctrl-] :<i>unfold,</i><br>
+                  Ctrl-H :<i>replace,</i><br>
+
+            </div>
+          </div>
+
+          <div class="row" id="wadah_tombol_kembali_berikutnya" style="width: 99%;">
+
+          </div>
         </div>
       </div>
       
     </main>
 
     <footer class="mt-auto text-white-50">
-      <!-- <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
-          href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p> -->
+      <p>Source Code: <a target="_blank" href="https://github.com/widibaka/perang-coding" class="text-white">@widibaka/perang-coding</a></p>
     </footer>
   </div>
 
@@ -348,6 +368,25 @@
 
 <script>
 
+  function open_soal(){
+    $('#keterangan').slideToggle(500);
+  };
+  $('#keterangan').find('a').on('click', function(e){
+    e.preventDefault();
+    $('#keterangan').slideToggle(500);
+    show_loader();
+    let redirect = $(this).attr('href');
+    setTimeout(function(){
+      location.href = redirect;
+    }, 1000);
+  })
+  function open_highscore(){
+    setTimeout(() => {
+      window.location.href = '<?php echo base_url() ?>highscore';
+    },1000);
+  };
+  
+
   function findGetParameter(parameterName) {
       var result = 1,
           tmp = [];
@@ -362,7 +401,7 @@
   var nomor_soal = findGetParameter('soal'); 
 
   if ( nomor_soal > 1 ) {
-    $('#wadah_tombol_kembali_berikutnya').append(`<a onclick="$.LoadingOverlay('show');" href="./?soal=${parseInt(nomor_soal)-1}" class="col-6 btn btn-lg btn-flat btn-danger w-50 mt-3" id="sebelumnya">Sebelumnya</a>`);
+    $('#wadah_tombol_kembali_berikutnya').append(`<a onclick="show_loader();" href="./?soal=${parseInt(nomor_soal)-1}" class="col-6 btn btn-lg btn-flat btn-danger w-50 mt-3" id="sebelumnya">Sebelumnya</a>`);
   }
 
   // buat const Toast
@@ -493,21 +532,28 @@
     $('#CodeEditor').addClass('is-invalid').removeClass('is-valid');
     
     $('#output-tab').tab('show');
+
+    set_menjadi_salah();
   }
 
   function munculkan_tombol_berikutnya(){
     // munculkan tombol "berikutnya"
     if ( $('#wadah_tombol_kembali_berikutnya').find('#berikutnya').length == 0 ) {
-      $('#wadah_tombol_kembali_berikutnya').append(`<a onclick="$.LoadingOverlay('show');" href="./?soal=${parseInt(nomor_soal)+1}" class="col-6 btn btn-lg btn-flat btn-primary w-50 mt-3" id="berikutnya" style="display: block;">Berikutnya</a>`);
+      $('#wadah_tombol_kembali_berikutnya').append(`<a onclick="show_loader();" href="./?soal=${parseInt(nomor_soal)+1}" class="col-6 btn btn-lg btn-flat btn-primary w-50 mt-3" id="berikutnya" style="display: block;">Berikutnya</a>`);
     }
-    // setTimeout( ()=>{
-    //   $('#berikutnya').show(300);
-    // }, 1000 );
+  }
+
+  function set_menjadi_benar() {
+    $.get( '<?php echo base_url() ?>welcome/set_sebagai_benar/' + nomor_soal );
+  }
+
+  function set_menjadi_salah() {
+    $.get( '<?php echo base_url() ?>welcome/set_sebagai_salah/' + nomor_soal );
   }
 
   function submit_code() {
     $.ajax({
-      url: '<?php echo base_url() . 'welcome/submit' ?>',
+      url: '<?php echo base_url() . 'welcome/submit/' ?>'+nomor_soal,
       method: 'POST',
       data: {
         code: editor.getValue(),
@@ -572,6 +618,9 @@
             if ( response.soal_berlanjut == true ) {
               munculkan_tombol_berikutnya();
             }
+
+            
+            set_menjadi_benar();
           }
 
         }, 500);
@@ -582,12 +631,30 @@
     });
   }
 
-  $(document).ajaxStart(function(){
-      $.LoadingOverlay("show", {
+  function reset_code() {
+    if (confirm('Apakah Anda yakin?') == false) {
+      return 0;
+    }
+    editor.setValue(
+      soal
+    );
+    localStorage.setItem(
+      "soal"+nomor_soal, 
+      editor.getValue()
+    );
+  }
+
+
+
+  function show_loader() {
+    $.LoadingOverlay("show", {
         background: "rgba(0, 0, 0, 0.5)",
         image: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="margin-right:-2px;display:block;background-repeat-y:initial;background-repeat-x:initial;animation-play-state:paused" ><g transform="translate(50 50)" style="transform:matrix(1, 0, 0, 1, 50, 50);animation-play-state:paused; background-color:rgb(241, 242, 243)" ><g transform="matrix(1,0,0,1,0,0)" style="transform:matrix(1, 0, 0, 1, 0, 0);animation-play-state:paused" ><path d="M29.491524206117255 -5.5 L37.491524206117255 -5.5 L37.491524206117255 5.5 L29.491524206117255 5.5 A30 30 0 0 1 24.742744050198738 16.964569457146712 L24.742744050198738 16.964569457146712 L30.399598299691117 22.621423706639092 L22.621423706639096 30.399598299691114 L16.964569457146716 24.742744050198734 A30 30 0 0 1 5.5 29.491524206117255 L5.5 29.491524206117255 L5.5 37.491524206117255 L-5.499999999999997 37.491524206117255 L-5.499999999999997 29.491524206117255 A30 30 0 0 1 -16.964569457146705 24.742744050198738 L-16.964569457146705 24.742744050198738 L-22.621423706639085 30.399598299691117 L-30.399598299691117 22.621423706639092 L-24.742744050198738 16.964569457146712 A30 30 0 0 1 -29.491524206117255 5.500000000000009 L-29.491524206117255 5.500000000000009 L-37.491524206117255 5.50000000000001 L-37.491524206117255 -5.500000000000001 L-29.491524206117255 -5.500000000000002 A30 30 0 0 1 -24.742744050198738 -16.964569457146705 L-24.742744050198738 -16.964569457146705 L-30.399598299691117 -22.621423706639085 L-22.621423706639092 -30.399598299691117 L-16.964569457146712 -24.742744050198738 A30 30 0 0 1 -5.500000000000011 -29.491524206117255 L-5.500000000000011 -29.491524206117255 L-5.500000000000012 -37.491524206117255 L5.499999999999998 -37.491524206117255 L5.5 -29.491524206117255 A30 30 0 0 1 16.964569457146702 -24.74274405019874 L16.964569457146702 -24.74274405019874 L22.62142370663908 -30.39959829969112 L30.399598299691117 -22.6214237066391 L24.742744050198738 -16.964569457146716 A30 30 0 0 1 29.491524206117255 -5.500000000000013 M0 -20A20 20 0 1 0 0 20 A20 20 0 1 0 0 -20" fill="#93dbe9" style="animation-play-state:paused" ></path></g></g><!-- generated by https://loading.io/ --></svg>',
         imageColor: "#fff", 
       });
+  }
+  $(document).ajaxStart(function(){
+      show_loader();
   });
   $(document).ajaxStop(function(){
       $.LoadingOverlay("hide");
@@ -623,6 +690,43 @@
       $('main').remove();
     }
   },1);
+
+  munculkan_tombol_berikutnya(); // munculkan aja sejak awal wkwkwk
+
+  $('.nav-link').click(function () {
+    $('.nav-link').removeClass('active');
+    $(this).addClass('active');
+  });
+
+
+  $('#berikutnya').click(function (e) {
+    e.preventDefault();
+    setTimeout(()=>{
+      window.location.href = $('#berikutnya').attr('href');
+    }, 600);
+  });
+  $('#sebelumnya').click(function (e) {
+    e.preventDefault();
+    setTimeout(()=>{
+      window.location.href = $('#sebelumnya').attr('href');
+    }, 600);
+  });
+
+
+
+  
+
+  // showing alert
+  <?php $alert = $this->session->flashdata("msg") ?>
+    <?php if ( !empty($alert) ): ?>
+      <?php $alert = explode("#", $alert) ?>
+      setTimeout(function() {
+        Toast.fire({
+          icon: "<?php echo $alert[0] ?>",
+          title: "<?php echo $alert[1] ?>"
+        });
+      }, 1000);
+  <?php endif ?>
 </script>
 
 </html>

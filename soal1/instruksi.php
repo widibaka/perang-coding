@@ -1,1 +1,1 @@
-Perbaikilah function tersebut agar dapat me-return hasil dari 5 x 7.
+Kotak di sebelah kiri Anda adalah sebuah function dalam bahasa pemrograman PHP. <br><br> Function itu masih salah dan tidak berfungsi.<br> Silakan perbaiki function tersebut agar mampu me-return hasil dari perkalian 5 x 7. <br><br><br> Klik tombol "Run Code" untuk menjalankan code jawaban Anda.<br><br> Klik tombol "Berikutnya" untuk lanjut ke soal berikutnya.

@@ -186,6 +186,9 @@
       height: 489px;
       overflow-y: scroll;
     }
+    .btn{
+      border-color: #333;
+    }
 
 
 
@@ -199,11 +202,11 @@
   <div class="d-flex w-100 h-100 p-3 flex-column">
     <header class="cover-container mb-auto mx-auto">
       <div>
-        <h3 class="float-md-start mb-0 me-5">Perang Coding</h3>
+        <h3 class="float-md-start mb-0 me-5">Pe/Co</h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
           <a class="nav-link" href="#" onclick="open_soal();">Jelajahi Soal</a>
           <a class="nav-link" href="#" onclick="show_loader();open_highscore();">Highscore</a>
-          <a class="nav-link" href="./logout">LogOut</a>
+          <a class="nav-link" onclick="localStorage.clear(); confirm('Anda Yakin?');" href="./logout">LogOut: [ <?php echo $this->session->userdata('name') ?> ]</a>
         </nav>
       </div>
     </header>
@@ -219,22 +222,23 @@
           <?php for ($i = 0; $i < $jumlah_soal; $i++): ?>
             <?php $nomor_soal = $i+1?>
             <?php if ( $this->Model->apa_jawaban_benar($i+1) ): $jumlah_yang_benar++; ?>
-              <a href="<?= base_url() . '?soal=' . $nomor_soal ?>" class="btn btn-success m-0 text-white" style="width: <?php echo $width_tiap_soal ?>%;"><?php echo $nomor_soal ?></a>
+              <a href="<?= base_url() . '?soal=' . $nomor_soal ?>" class="btn btn-success m-0 text-white" style="width: <?php echo $width_tiap_soal ?>%;">Soal <?php echo $nomor_soal ?></a>
             <?php elseif( $this->Model->apa_sudah_dijawab( $nomor_soal ) ): ?>
-              <a href="<?= base_url() . '?soal=' . $nomor_soal ?>" class="btn btn-danger m-0 text-white" style="width: <?php echo $width_tiap_soal ?>%;"><?php echo $nomor_soal ?></a>
+              <a href="<?= base_url() . '?soal=' . $nomor_soal ?>" class="btn btn-danger m-0 text-white" style="width: <?php echo $width_tiap_soal ?>%;">Soal <?php echo $nomor_soal ?></a>
             <?php else: ?>
-              <a href="<?= base_url() . '?soal=' . $nomor_soal ?>" class="btn btn-secondary m-0 text-white" style="width: <?php echo $width_tiap_soal ?>%;"><?php echo $nomor_soal ?></a>
+              <a href="<?= base_url() . '?soal=' . $nomor_soal ?>" class="btn btn-secondary m-0 text-white" style="width: <?php echo $width_tiap_soal ?>%;">Soal <?php echo $nomor_soal ?></a>
             <?php endif ?>
           <?php endfor; ?>
 
         </div>
-        <div class="col-md-12">
-         <p class="lead"> Score: <?php echo $jumlah_yang_benar ?>/<?php echo $jumlah_soal ?> </p>
-        </div>
+        
       </div>
 
 
       <div class="row d-flex justify-content-center">
+        <div class="col-md-12">
+            <p class="lead"> Score Anda: <?php echo $jumlah_yang_benar ?>/<?php echo $jumlah_soal ?> </p>
+        </div>
         <div class="col-md-6" style="max-width: 750px;">
           <p class="lead">
           <article class="btn-flat text-start form-control" id="CodeEditor"></article>

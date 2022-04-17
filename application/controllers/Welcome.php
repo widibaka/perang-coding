@@ -236,7 +236,7 @@ class Welcome extends CI_Controller {
 
 		foreach ($filters as $key => $value) {
 			if ( strpos($_POST['code'], $value) !== false ) {
-					die('String $value dideteksi sebagai upaya peretasan. <br> Mohon gunakan function atau command lain.');
+					die('String <b style="color:red">'.$value.'</b> dideteksi sebagai upaya peretasan. <br> Mohon gunakan function atau command lain.');
 			}
 		}
 

@@ -167,9 +167,9 @@
 </head>
 
 
-<body class="d-flex h-100 text-center text-white bg-dark" style="height: 100%!important;">
+<body class="d-flex text-center text-white bg-dark" style="height: 100%!important;">
   
-  <div class="d-flex w-100 h-100 p-3 flex-column">
+  <div class="d-flex w-100 p-3 flex-column">
     <header class="cover-container mb-auto mx-auto">
       <div>
         <h3 class="float-md-start mb-0 me-5">Pe/Co</h3>
@@ -210,7 +210,7 @@
 
       <div class="row d-flex justify-content-center">
         
-        <div class="col-md-6" style="max-width: 750px;">
+        <div class="col-md-6 table-responsive" style="max-width: 750px;">
 
           <table id="example" class="table text-light" style=" border: solid black 1px; width:100%">
 						<thead>

@@ -109,7 +109,7 @@
 
     body {
       text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-      box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+      /* box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5); */
     }
 
     .cover-container {
@@ -190,16 +190,16 @@
       border-color: #333;
     }
 
-
+    
 
 
   </style>
 </head>
 
 
-<body class="d-flex h-100 text-center text-white bg-dark" style="height: 100%!important;">
+<body class="d-flex text-center text-white bg-dark" style="height: 100%!important;">
   
-  <div class="d-flex w-100 h-100 p-3 flex-column">
+  <div class="d-flex w-100 p-3 flex-column">
     <header class="cover-container mb-auto mx-auto">
       <div>
         <h3 class="float-md-start mb-0 me-5">Pe/Co</h3>
@@ -214,7 +214,7 @@
     <main class="w-100 row">
 
       <div class="row mb-5" id="keterangan" style="display: none;">
-        <div class="col-md-12 mx-auto d-flex justify-content-center" style="max-width: 1500px;">
+        <div class="col-md-12 mx-auto d-flex justify-content-center" style="max-width: 80%;">
           <?php 
             $width_tiap_soal = round(1 / $jumlah_soal * 100);
             $jumlah_yang_benar = 0;
@@ -239,16 +239,21 @@
         <div class="col-md-12">
             <p class="lead"> Score Anda: <?php echo $jumlah_yang_benar ?>/<?php echo $jumlah_soal ?> </p>
         </div>
-        <div class="col-md-6" style="max-width: 750px;">
+        <div class="col-md-6" style="max-width: 40%;">
           <p class="lead">
           <article class="btn-flat text-start form-control" id="CodeEditor"></article>
           <div class="row" style="width: 99%;">
-            <button onclick="reset_code();" type="button" class="btn btn-lg btn-flat btn-info w-50 mt-3">Reset Code</button>
-            <button onclick="submit_code();" type="button" class="btn btn-lg btn-flat btn-outline-success w-50 mt-3">Run Code</button>
+            <button onclick="reset_code();" type="button" class="btn btn-lg btn-flat btn-info w-50 mt-3">Reset Code <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+              <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+            </svg></button>
+            <button onclick="submit_code();" type="button" class="btn btn-lg btn-flat btn-outline-success w-50 mt-3">Run Code <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightning-charge-fill" viewBox="0 0 16 16">
+              <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+            </svg></button>
           </div>
           </p>
         </div>
-        <div class="col-md-6" style="max-width: 750px;">
+        <div class="col-md-6" style="max-width: 40%;">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -405,7 +410,9 @@
   var nomor_soal = findGetParameter('soal'); 
 
   if ( nomor_soal > 1 ) {
-    $('#wadah_tombol_kembali_berikutnya').append(`<a onclick="show_loader();" href="./?soal=${parseInt(nomor_soal)-1}" class="col-6 btn btn-lg btn-flat btn-danger w-50 mt-3" id="sebelumnya">Sebelumnya</a>`);
+    $('#wadah_tombol_kembali_berikutnya').append(`<a onclick="show_loader();" href="./?soal=${parseInt(nomor_soal)-1}" class="col-6 btn btn-lg btn-flat btn-danger w-50 mt-3" id="sebelumnya"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+      <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+    </svg> Sebelumnya</a>`);
   }
 
   // buat const Toast
@@ -543,7 +550,9 @@
   function munculkan_tombol_berikutnya(){
     // munculkan tombol "berikutnya"
     if ( $('#wadah_tombol_kembali_berikutnya').find('#berikutnya').length == 0 ) {
-      $('#wadah_tombol_kembali_berikutnya').append(`<a onclick="show_loader();" href="./?soal=${parseInt(nomor_soal)+1}" class="col-6 btn btn-lg btn-flat btn-primary w-50 mt-3" id="berikutnya" style="display: block;">Berikutnya</a>`);
+      $('#wadah_tombol_kembali_berikutnya').append(`<a onclick="show_loader();" href="./?soal=${parseInt(nomor_soal)+1}" class="col-6 btn btn-lg btn-flat btn-primary w-50 mt-3" id="berikutnya" style="display: block;">Berikutnya <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+      </svg></a>`);
     }
   }
 

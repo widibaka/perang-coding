@@ -35,13 +35,13 @@ class Welcome extends CI_Controller {
 			}
 		}
 
-		$data['jumlah_soal'] = $this->jumlah_soal;
+		$data6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73['jumlah_soal'] = $this->jumlah_soal;
 
 		if ( empty($this->session->userdata('email')) ) {
 			redirect( base_url('login') . '?balik=' . base64_encode( base_url(uri_string()) ) );
 			die;
 		}
-		$this->load->view('welcome_message', $data);
+		$this->load->view('welcome_message', $data6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73);
 	}
 
 	public function submit($nomor_soal)
@@ -241,14 +241,15 @@ class Welcome extends CI_Controller {
 		}
 
 		try {
-			$data['hasil'] = eval($_POST['code']);
-			$data['soal_berlanjut'] = (
+			// variabel $data dibuat unik agar tidak menyamai variable hasil submit
+			$data6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73['hasil'] = eval($_POST['code']);
+			$data6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73['soal_berlanjut'] = (
 					file_exists( base_url() . 'soal'.$_POST['nomor_soal'].'/soal.php' )
 					AND file_exists( base_url() . 'soal'.$_POST['nomor_soal'].'/jawaban.php')
 					AND file_exists( base_url() . 'soal'.$_POST['nomor_soal'].'/instruksi.php' )
 			);
-			if ( $data['hasil'] ) {
-					echo json_encode($data);
+			if ( $data6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73['hasil'] ) {
+					echo json_encode($data6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73);
 					die();
 			}
 		}

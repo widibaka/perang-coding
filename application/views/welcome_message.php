@@ -515,7 +515,7 @@
     hasil_new = hasil_new.split('<p>Filename:')[0];
     $('#hasil_response').html('<h1 class="text-danger">Salah!</h1>'+hasil_new);
 
-    if ( hasil_new.includes('Terdeteksi upaya peretasan') ) {
+    if ( hasil_new.includes('Mohon gunakan function atau command lain') ) {
       $('#hasil_response').html('<h1 class="text-danger">Awas!</h1>'+hasil_new);
     }
 

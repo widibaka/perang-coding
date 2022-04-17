@@ -47,7 +47,7 @@ class Welcome extends CI_Controller {
 	public function submit($nomor_soal)
 	{
 
-		$filters = [
+		$filters6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73 = [
 			'exec',
 			'passthru',
 			'system',
@@ -227,16 +227,16 @@ class Welcome extends CI_Controller {
 		];
 
 		// simpan jawaban
-		$jawaban = $this->Model->get_jawaban( $this->session->userdata('user_id'),  $nomor_soal);
-		if (!empty($jawaban)) {
+		$jawaban6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73 = $this->Model->get_jawaban( $this->session->userdata('user_id'),  $nomor_soal);
+		if (!empty($jawaban6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73)) {
 			$this->Model->update_jawaban( $this->session->userdata('user_id'), $nomor_soal, $_POST['code'] );
 		}else{
 			$this->Model->add_jawaban( $this->session->userdata('user_id'), $nomor_soal, $_POST['code'] );
 		}
 
-		foreach ($filters as $key => $value) {
-			if ( strpos($_POST['code'], $value) !== false ) {
-					die('String <b style="color:red">'.$value.'</b> dideteksi sebagai upaya peretasan. <br> Mohon gunakan function atau command lain.');
+		foreach ($filters6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73 as $key6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73 => $value6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73) {
+			if ( strpos($_POST['code'], $value6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73) !== false ) {
+					die('String <b style="color:red">'.$value6E74AEHU6JKBQ9I5F3VFU6KBQ43PBOJJQ2A3FP73.'</b> dideteksi sebagai upaya peretasan. <br> Mohon gunakan function atau command lain.');
 			}
 		}
 

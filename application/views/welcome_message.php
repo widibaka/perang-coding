@@ -699,11 +699,20 @@
 
   setTimeout(()=>{
     if ( jawaban == '' && soal == '' && instruksi == '' ) {
-      Swal.fire(
-        'Selamat!',
-        'Anda sudah menyelesaikan semua soal.',
-        'success'
-      );
+      Swal.fire({
+        title: 'Selamat!',
+        icon: 'success',
+        text: 'Anda sudah menyelesaikan semua soal.',
+        // showDenyButton: true,
+        // showCancelButton: true,
+        confirmButtonText: 'Menuju Highscore',
+        // denyButtonText: `Don't save`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          window.location.href = '<?php echo base_url() ?>highscore';
+        }
+      });
       $('main').remove();
     }
   },1);

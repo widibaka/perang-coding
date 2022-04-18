@@ -377,6 +377,10 @@
 
 <script>
 
+  if ( $('main').width() <= 880 ) {
+    $('main').html('<h1>Mohon gunakan Desktop Mode.</h1>');
+  }
+
   function open_soal(){
     $('#keterangan').slideToggle(500);
   };
